@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package backend.admin_api.v1;
+
+import "backend/admin_api/v1/api_user.proto";
+import "google/api/annotations.proto";
+
+service AdminV1Service {
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+    option (google.api.http) = {get: "/admin/v1/users/{uuid}"};
+  }
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+    option (google.api.http) = {
+      post: "/admin/v1/users",
+      body: "*"
+    };
+  }
+}

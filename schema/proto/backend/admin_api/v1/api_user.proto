@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package backend.admin_api.v1;
+
+import "backend/admin_api/v1/model_user.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message CreateUserRequest {
+  string name = 1;
+  uint32 role = 2;
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: [
+        "name",
+        "role"
+      ]
+    }
+  };
+}
+
+message CreateUserResponse {
+  User user = 1;
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["user"]
+    }
+  };
+}
+
+message GetUserRequest {
+  string id = 1;
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["uuid"]
+    }
+  };
+}
+
+message GetUserResponse {
+  User user = 1;
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["user"]
+    }
+  };
+}

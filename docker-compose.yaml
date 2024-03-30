@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  main-db:
+    build: ./db/main
+    volumes:
+      - ./db/main/initdb.d:/docker-entrypoint-initdb.d
+      - ./db/main/data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      TZ: "Asia/Tokyo"
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: maindb
+
+#  main-mysql-schema:
+#    depends_on:
+#      - main-mysql
+#    build: ./mysql/main/erd
+#    volumes:
+#      - "./mysql/main/erd/src:/output"
+#      - "./mysql/main/erd/schemaspy.properties:/app/schemaspy.properties:ro"
+#    container_name: "schemaspy"
+#    command: "java -jar schemaspy.jar"
